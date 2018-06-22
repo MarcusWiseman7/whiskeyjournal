@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{!-- meta tags --}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="Marcus Wiseman">
+  <meta name="theme-color" content="#d5ac61">
+  
+  <title>{{title}}</title>
+
+  {{!-- Icons --}}
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+  {{!-- Styles and fonts --}}
+  <link href="https://fonts.googleapis.com/css?family=Lora|Vast+Shadow" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.min.css" />
+</head>
+
+<body>
+  {{#if error}}
+    <p class="alert alert-warning">{{error}}</p>
+  {{/if}}
+
+  {{#if info}}
+    <p class="alert alert-warning">{{info}}</p>
+  {{/if}}
+
+  {{{body}}}
+
+  <footer>
+    <div class="container">
+      <h1>What whiskey will not cure, there is no cure for.</h1>
+      <br>
+      <h5>-Irish Proverb</h5>
+    </div>
+    <div class="copyright">
+      <small>Copyright &copy; Marcus Wiseman 2018</small>
+    </div>
+  </footer>
+
+  {{!-- jquery, bootstrap and necessary plugins  --}}
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+  {{!-- Scripts --}}
+  <script src="./javascripts/main.min.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,252 @@
+<div class="jumbotron">
+  <a type="button" class="btn btn-secondary float-right" id="logout" href="/users/logout">Log Out</a>
+  <a type="button" class="btn btn-secondary modalButton float-right text-white" data-toggle="modal" data-target="#loginModal" id="login">Login/Signup</a>
+  <div class="container d-flex justify-content-center">
+    <h1 class="display-4 title">{{title}}
+      <a id="add" style="margin-bottom:.5rem" class="btn btn-info modalButton" data-toggle="modal" data-target="#addWhiskeyModal">
+        <i class="fab fa-bitbucket fa-2x"></i>
+      </a>
+    </h1>
+  </div>
+</div>
+
+{{!-- whiskeys in journal --}}
+<table id="whiskeys-table" class="table table-hover my-5">
+  <thead>
+    <tr>
+      <th scope="col">Show</th>
+      <th scope="col">Name</th>
+      <th scope="col">Distillery</th>
+    </tr>
+  </thead>
+  <tbody id="whiskeys-in-journal"></tbody>
+</table>
+{{!-- / whiskeys in journal --}}
+
+{{!-- modal for showing a whiskey  --}}
+<div class="modal fade" id="showWhiskeyModal" tabindex="-1" role="dialog" aria-labelledby="showWhiskeyModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="show-whiskey"></div>
+  </div>
+</div>
+{{!-- / modal for showing a whiskey  --}}
+
+{{!-- modal for login/signup --}}
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login/Signup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/users/login" method="POST" id="login-form">
+          <div class="form-group col-6">
+            <label for="userName">User Name</label>
+            <input type="text" class="form-control" id="username" name="username" autofocus required>
+          </div>
+          <div class="form-group col-6">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-info" id="newUser">New User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for login/signup --}}
+
+{{!-- modal for editing a whiskey --}}
+<div class="modal fade" id="whiskeyModal" tabindex="-1" role="dialog" aria-labelledby="whiskeyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="whiskeyModalLabel">Edit Whiskey</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="whiskey-modal-form"></form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="deleteWhiskey" class="btn btn-danger">Delete Whiskey</button>
+        <button type="button" id="saveWhiskey" class="btn btn-info">Save Whiskey</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for editing a whiskey --}}
+
+{{!-- modal for adding a whiskey --}}
+<div class="modal fade" id="addWhiskeyModal" tabindex="-1" role="dialog" aria-labelledby="addWhiskeyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addWhiskeyModalLabel">Add Whiskey</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="whiskey-form" method="POST" action="/add">
+          <div class="form-row col">
+            <div class="form-group col-sm">
+              <label for="whiskeyName">*Whiskey Name</label>
+              <input type="text" class="form-control" id="whiskeyName" name="whiskeyName" required autofocus>
+            </div>
+            <div class="form-group col-sm">
+              <label for="distillery">*Distillery</label>
+              <input type="text" class="form-control" id="distillery" name="distillery" required>
+            </div>
+          </div>
+
+          <div class="form-row col">
+            <div class="form-group col-sm-4">
+              <label for="country">*Country</label>
+              <input type="text" class="form-control" id="country" name="country" required>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="style">Style</label>
+              <input type="text" class="form-control" id="style" name="style">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="age">Age</label>
+              <input type="text" class="form-control" id="age" name="age">
+            </div>
+          </div>
+
+          <div class="form-row col">
+            <div class="form-group col-sm">
+              <label for="rating">Rating</label>
+              <input type="text" class="form-control" id="rating" name="rating">
+            </div>
+            <div class="form-group col-sm">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" id="location" name="location">
+            </div>
+            <div class="form-group col-sm">
+              <label for="price">Price</label>
+              <input type="text" class="form-control" id="price" name="price">
+            </div>
+          </div>
+          
+          <div class="form-group col-sm">
+            <label for="notes">Notes</label>
+            <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" id="addWhiskey" class="btn btn-info">Add Whiskey</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for adding a whiskey --}}
+
+{{!-- template for displaying whiskeys --}}
+<script id="whiskeys-template" type="text/x-handlebars-template">
+  \{{#each whiskeys}}
+    <tr>
+      <td>
+        <a id="\{{_id}}" class="btn btn-info modalButton" data-toggle="modal" data-target="#showWhiskeyModal">
+          <i class="fab fa-bitbucket"></i>
+        </a>
+      </td>
+      <td>\{{whiskeyName}}</td>
+      <td>\{{distillery}}</td>
+    </tr>
+  \{{/each}}
+</script>
+{{!-- / template for displaying whiskeys --}}
+
+{{!-- template for showing one whiskey  --}}
+<script id="show-whiskey-template" type="text/x-handlebars-template">
+  <div class="modal-header">
+    <h4 class="modal-title" id="showWhiskeyModalTitle">\{{whiskey.whiskeyName}}</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>Distillery: \{{whiskey.distillery}}</h6>
+    <p>Country: \{{whiskey.country}}</p>
+    <p>Style: \{{whiskey.style}}</p>
+    <p>Age: \{{whiskey.age}}</p>
+    <p>Price: \{{whiskey.price}}</p>
+    <p>Location: \{{whiskey.location}}</p>
+    <p>Rating: \{{whiskey.rating}}</p>
+    <p>Notes: \{{whiskey.notes}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-info modalButton" data-toggle="modal" data-target="#whiskeyModal" id="\{{whiskey._id}}">Edit Whiskey</button>
+  </div>
+</script>
+{{!-- / template for showing one whiskey --}}
+
+{{!-- template for editing beer --}}
+<script id="whiskey-edit-template" type="text/x-handlebars-template">
+  <div class="form-row col">
+    <div class="form-group col-sm">
+      <label for="edit-whiskeyName">Whiskey Name</label>
+      <input type="text" class="form-control" id="edit-whiskeyName" name="edit-whiskeyName" value="\{{whiskey.whiskeyName}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-distillery">Distillery</label>
+      <input type="text" class="form-control" id="edit-distillery" name="edit-distillery" value="\{{whiskey.distillery}}">
+    </div>
+  </div>
+
+  <div class="form-row col">
+    <div class="form-group col-sm-4">
+      <label for="edit-country">Country</label>
+      <input type="text" class="form-control" id="edit-country" name="edit-country" value="\{{whiskey.country}}">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="edit-style">Style</label>
+      <input type="text" class="form-control" id="edit-style" name="edit-style" value="\{{whiskey.style}}">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="edit-age">Age</label>
+      <input type="text" class="form-control" id="edit-age" name="edit-age" value="\{{whiskey.age}}">
+    </div>
+  </div>
+
+  <div class="form-row col">
+    <div class="form-group col-sm">
+      <label for="edit-rating">Rating</label>
+      <input type="text" class="form-control" id="edit-rating" name="edit-rating" value="\{{whiskey.rating}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-location">Location</label>
+      <input type="text" class="form-control" id="edit-location" name="edit-location" value="\{{whiskey.location}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-price">Price</label>
+      <input type="text" class="form-control" id="edit-price" name="edit-price" value="\{{whiskey.price}}">
+    </div>
+  </div>
+  
+  <div class="form-group col-sm">
+    <label for="edit-notes">Notes</label>
+    <textarea class="form-control" name="edit-notes" id="edit-notes" rows="3">\{{whiskey.notes}}</textarea>
+  </div>
+  <div class="form-group col-sm">
+    <label for="edit-whiskeyId">Whiskey Id</label>
+    <input type="text" name="" id="edit-whiskeyId" value="\{{whiskey._id}}" readonly>
+  </div>
+</script>
+{{!-- / template for editing whiskey --}}
